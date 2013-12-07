@@ -21,4 +21,16 @@ describe FeatureGrader do
       expect(FeatureGrader.new('foo', {:description => 'hw3.yml'}).logpath).not_to be_nil
     end
   end
+  describe '#log' do
+    before(:each) do
+      TempArchiveFile.stub(:new).and_return(double("path", :path=>"/tmp"))
+      File.stub(:file?).and_return true
+      File.stub(:readable?).and_return true
+      @feature_grader = FeatureGrader.new('foo', {:description => 'hw3.yml'})
+    end
+
+    it 'i dont know' do
+      @feature_grader.log
+    end
+  end
 end

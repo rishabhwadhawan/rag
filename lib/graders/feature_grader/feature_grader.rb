@@ -77,6 +77,7 @@ class FeatureGrader < AutoGrader
   end
 
   def log(*args)
+    debugger
     @m_output.synchronize do
       @output += [*args]
     end
