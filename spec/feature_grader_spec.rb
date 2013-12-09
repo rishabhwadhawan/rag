@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe FeatureGrader do
-  describe '#new' do
+  describe '#initialize' do
     it "should give error if it cannot find the features archive file" do
       File.should_receive(:file?).with('foo').and_return false
       lambda { FeatureGrader.new('foo', {}) }.should raise_error ArgumentError, /features/
@@ -26,5 +26,13 @@ describe FeatureGrader do
       File.stub(:readable?).and_return true
       expect(FeatureGrader.new('foo', {:description => 'hw3.yml'}).log).not_to be_nil
     end
+  end
+  describe "#dump" do
+     it 'should join comments with dump output' do
+       TempArchiveFile.stub(:new).and_return(double("path", :path=>"/tmp"))
+       File.stub(:file?).and_return true
+       File.stub(:readable?).and_return true
+       expect(FeatureGrader.new('foo', {:description => 'hw3.yml'}).dump_output).to be_nil
+     end
   end
 end
